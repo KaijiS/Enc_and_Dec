@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="EncDec.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>簡易暗号化・復号化</title>
+  </head>
+  <body>
+    <div class="tabs">
+      <div class="mini_header">
+        <h1>簡易暗号化・復号化</h1>
+      </div>
+      <input id="Enc_side" type="radio" name="tab_item" checked>
+      <label class="tab_item" for="Enc_side">暗号化</label>
+      <input id="Dec_side" type="radio" name="tab_item">
+      <label class="tab_item" for="Dec_side">復号化</label>
+
+      <div class="tab_content" id="Enc_side_content">
+        <div class="tab_content_description">
+          <form id="enc_form" method="GET">
+            <input class="input_text" name="enc_comment" placeholder="暗号化する前の平文を入力してください" id="enc_comment"/><br><br>
+            <div class="nidan">
+              <span clsss="key_mes">暗号化するためのキーを設定(1~9):</span>
+              <input class="select_number" type="number" min="0" max="9" name="enc_num" id="enc_num"/>
+            </div>
+          </form>
+          <br>
+          <div class="button_wrapper">
+            <button id="enc_ajax" class="conv_bt" type="submit">暗号化</button>
+          </div>
+        </div><br><br>
+        <div class="enc_result"></div>
+      </div>
+
+      <div class="tab_content" id="Dec_side_content">
+        <div class="tab_content_description">
+          <form id="dec_form" method="GET">
+            <input class="input_text" name="dec_comment" placeholder="復号化する前の暗号文を入力してください" id="dec_comment"/><br><br>
+            <div class="nidan">
+              <span clsss="key_mes">暗号化したときのキーを設定(1~9):</span>
+              <input class="select_number" type="number" min="0" max="9" name="dec_num" id="dec_num"/>
+            </div>
+          </form>
+          <br>
+          <div class="button_wrapper">
+            <button id="dec_ajax" class="conv_bt" type="submit">復号化</button>
+          </div>
+        </div><br><br>
+        <div class="dec_result"></div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+
+        $(function(){
+            // Ajax button click
+            $('#enc_ajax').on('click',function(){
+                $.ajax({
+                    url:'Enc.php',
+                    type:'GET',
+                    data:{
+                        'comment':$('#enc_comment').val(),
+                        'num':$('#enc_num').val()
+                    }
+                })
+                // Ajaxリクエストが成功した時発動
+                .done( (data) => {
+                    $('.enc_result').html(data);
+                    console.log(data);
+                })
+                // Ajaxリクエストが失敗した時発動
+                .fail( (data) => {
+                    $('.enc_result').html(data);
+                    console.log(data);
+                })
+                // Ajaxリクエストが成功・失敗どちらでも発動
+                .always( (data) => {
+
+                });
+            });
+        });
+
+        $(function(){
+            // Ajax button click
+            $('#dec_ajax').on('click',function(){
+                $.ajax({
+                    url:'Dec.php',
+                    type:'GET',
+                    data:{
+                        'comment':$('#dec_comment').val(),
+                        'num':$('#dec_num').val()
+                    }
+                })
+                // Ajaxリクエストが成功した時発動
+                .done( (data) => {
+                    $('.dec_result').html(data);
+                    console.log(data);
+                })
+                // Ajaxリクエストが失敗した時発動
+                .fail( (data) => {
+                    $('.dec_result').html(data);
+                    console.log(data);
+                })
+                // Ajaxリクエストが成功・失敗どちらでも発動
+                .always( (data) => {
+
+                });
+            });
+        });
+
+    </script>
+  </body>
+</html>
