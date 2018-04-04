@@ -11,6 +11,11 @@
     <div class="tabs">
       <div class="mini_header">
         <h1>簡易暗号化・復号化</h1>
+        <p>
+          <span class="ten">バレたらまずいちょっとしたメッセージや情報をメモっておきたいとき，<br>
+          暗号化してメモればより安全?</span><br><br>
+          <span class="marker">1桁のキーだけ覚えておけばOK!</span><br><br>
+        </p>
       </div>
       <input id="Enc_side" type="radio" name="tab_item" checked>
       <label class="tab_item" for="Enc_side">暗号化</label>
@@ -20,7 +25,11 @@
       <div class="tab_content" id="Enc_side_content">
         <div class="tab_content_description">
           <form id="enc_form" method="GET">
-            <input class="input_text" name="enc_comment" placeholder="暗号化する前の平文を入力してください" id="enc_comment"/><br><br>
+            <input class="input_text" name="enc_comment" placeholder="暗号化する前の平文を入力してください" id="enc_comment"/><br>
+            <div class="kome">
+              ※アルファベットや数字のみ対応．日本語はローマ字などに変換してからお使いください．
+            </div>
+            <br>
             <div class="nidan">
               <span clsss="key_mes">暗号化するためのキーを設定(1~9):</span>
               <input class="select_number" type="number" min="0" max="9" name="enc_num" id="enc_num"/>
@@ -37,7 +46,11 @@
       <div class="tab_content" id="Dec_side_content">
         <div class="tab_content_description">
           <form id="dec_form" method="GET">
-            <input class="input_text" name="dec_comment" placeholder="復号化する前の暗号文を入力してください" id="dec_comment"/><br><br>
+            <input class="input_text" name="dec_comment" placeholder="復号化する前の暗号文を入力してください" id="dec_comment"/><br>
+            <div class="kome">
+              ※アルファベットや数字のみ対応．日本語はローマ字などに変換してからお使いください．
+            </div>
+            <br>
             <div class="nidan">
               <span clsss="key_mes">暗号化したときのキーを設定(1~9):</span>
               <input class="select_number" type="number" min="0" max="9" name="dec_num" id="dec_num"/>
